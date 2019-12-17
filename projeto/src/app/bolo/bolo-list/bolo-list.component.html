@@ -1,0 +1,16 @@
+<p>bolo-list works!</p>
+<div>
+    <input type="text" [disabled]="showOne" [(ngModel)]="novo" />
+    <button [disabled]="showOne" (click)="clickNovo()">Adicionar</button>
+</div>
+<input type="checkbox" [(ngModel)]="showOne" /> Exibir somente o primeiro?
+<ul *ngIf="showOne">
+    <h3>
+        {{lista[0]}}
+    </h3>
+</ul>
+<ul *ngIf="!showOne">
+    <li *ngFor="let item of lista">
+        {{item}}
+    </li>
+</ul>
