@@ -1,0 +1,20 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(70, 70, 70, 0.3);
+    width: 100%;
+    min-width: 600px;
+    height: 200px;
+    margin: 10px 2px;
+    border-radius: 20px;
+}
+
+h1 {
+    font-size: 70px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 5px 5px 5px silver;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white; 
+    color: darkred;
+}

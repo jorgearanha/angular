@@ -1,0 +1,9 @@
+<div>
+    <label>Nome:</label>
+    <input type="text" [(ngModel)]="name">
+</div>
+<div>
+    <label>Salario:</label>
+    <input type="number" [(ngModel)]="salary">
+</div>
+<button type="button" (click)="addEmployee($event)">Adicionar o Empregado</button>

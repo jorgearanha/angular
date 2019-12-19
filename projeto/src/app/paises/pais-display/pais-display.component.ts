@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Pais } from '../pais';
 
 @Component({
   selector: 'app-pais-display',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaisDisplayComponent implements OnInit {
 
+  @Input() pais: Pais;
+  @Output() notificacao = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onClick() {
+    console.log('Display Paises Click');
+    this.notificacao.emit(this.pais);
   }
 
 }

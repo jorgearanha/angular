@@ -1,1 +1,24 @@
-<p>paises-list works!</p>
+<div class="col">
+  <select [(ngModel)]="lang" (change)="atualizarListaPaisesPorIdioma()">
+    <option value="pt">PT</option>
+    <option value="en">EN</option>
+    <option value="es">ES</option>
+    <option value="fr">FR</option>
+  </select>
+  <ul>
+    <li *ngFor="let item of lista">
+      {{item}}
+    </li>
+  </ul>
+</div>
+<div class="col">
+  <h3>Com Observable</h3>
+
+  <input type="text" [formControl]="term" />
+  <h5 *ngIf="semResultado">Nenhum resultado encontrado</h5>
+  <ul *ngIf="!semResultado">
+    <li *ngFor="let item of paises">
+      <app-pais-display [pais]="item" (notificacao)="eventoCallback($event)"></app-pais-display>
+    </li>
+  </ul>
+</div>

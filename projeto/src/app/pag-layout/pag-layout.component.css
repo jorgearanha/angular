@@ -1,0 +1,23 @@
+.wrapper {
+    margin: 5px;
+    padding: 5px;
+    border: 1px black solid;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 150px;
+}
+
+a {
+    margin: 0px 2px;
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+    padding: 2px;
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: rgba(100, 102, 194, 0.7);
+}
+
+a.active {
+    margin: 5px;
+    font-size: 120%;
+} 
