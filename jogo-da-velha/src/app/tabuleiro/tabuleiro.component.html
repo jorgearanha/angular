@@ -1,27 +1,8 @@
 <section id="tabuleiro">
     <div id="container">
-        <div class="linha1">
-            <div class="coluna1">
-            </div>
-            <div class="coluna2">
-            </div>
-            <div class="coluna3">
-            </div>
-        </div>
-        <div class="linha2">
-            <div class="coluna1">
-            </div>
-            <div class="coluna2">
-            </div>
-            <div class="coluna3">
-            </div>
-        </div>
-        <div class="linha3">
-            <div class="coluna1">
-            </div>
-            <div class="coluna2">
-            </div>
-            <div class="coluna3">
+        <div *ngFor="let linha of tabuleiro">
+            <div *ngFor="let casa of linha">
+                <app-casa [ttone]="ttone" [casa]="casa" (notificacao)="eventoFilho()"></app-casa>
             </div>
         </div>
     </div>
