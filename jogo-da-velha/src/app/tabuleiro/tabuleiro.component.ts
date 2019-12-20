@@ -73,6 +73,8 @@ export class TabuleiroComponent implements OnInit {
           imageUrl: '../../assets/images/' + casas[0].ttone + '.png',
           imageWidth: 200,
           imageHeight: 200,
+          showConfirmButton: true,
+          confirmButtonColor: '#8B0000',
           title: "Parabéns!",
           text: "O vencedor foi: " + casas[0].ttone,
           background: '#F0F8FF url(../../assets/background/alert.png)',
@@ -80,7 +82,13 @@ export class TabuleiroComponent implements OnInit {
             rgba(0,0,123,0.4)
             url("../../assets/images/xmas.gif")
             left top
-            no-repeat`
+            no-repeat`,
+            customClass: {
+              title: 'teste',
+            },
+          html:
+            'Compre, ' +
+            '<a href="//sweetalert2.github.io">aqui</a>',
         }).then(() => {
           this.inicializaTab();
         });
@@ -105,6 +113,8 @@ export class TabuleiroComponent implements OnInit {
             title: "Opa!!",
             text: "Deu velha",
             icon: "warning",
+            showConfirmButton: true,
+            confirmButtonColor: '#d20000',
             background: '#F0F8FF url(../../assets/background/alert.png)',
             backdrop: `
               rgba(0,0,123,0.4)
