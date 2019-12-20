@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Casa } from '../casa';
+import Swal, {  } from "sweetalert2";
 
 @Component({
   selector: 'app-tabuleiro',
@@ -32,8 +33,12 @@ export class TabuleiroComponent implements OnInit {
 
   eventoFilho() {
     this.alteraTtone();
-    let a = this.verificaVencedor()
-    if (a) console.log(a);
+    let vencedor = this.verificaVencedor()
+    if (vencedor) {
+      setTimeout(() => {
+        Swal.fire("Parabéns!", "O vencedor foi: " + vencedor.ttone, "success")
+      }, 300);
+    }
   }
 
   alteraTtone() {
