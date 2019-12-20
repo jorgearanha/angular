@@ -20,6 +20,15 @@ export class TabuleiroComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    this.panettone = "panettone";
+    this.chocottone = "chocottone";
+
+    this.inicializaTab();
+    
+  }
+
+  inicializaTab() {
     this.tabuleiro = [
       [new Casa(0, 0), new Casa(0, 1), new Casa(0, 2)],
       [new Casa(1, 0), new Casa(1, 1), new Casa(1, 2)],
@@ -35,10 +44,7 @@ export class TabuleiroComponent implements OnInit {
       [this.tabuleiro[0][2], this.tabuleiro[1][2], this.tabuleiro[2][2]],
       [this.tabuleiro[0][0], this.tabuleiro[1][1], this.tabuleiro[2][2]],
       [this.tabuleiro[0][2], this.tabuleiro[1][1], this.tabuleiro[2][0]]
-    ]
-
-    this.panettone = "panettone";
-    this.chocottone = "chocottone";
+    ];
 
     this.ttone = this.panettone;
   }
@@ -49,7 +55,7 @@ export class TabuleiroComponent implements OnInit {
   }
 
   alteraTtone() {
-    if (this.ttone == this.panettone) this.ttone = this.chocottone
+    if (this.ttone == this.panettone) this.ttone = this.chocottone;
     else this.ttone = this.panettone;
     //console.log(this.ttone);
   }
@@ -60,9 +66,6 @@ export class TabuleiroComponent implements OnInit {
     for (let i = 0; i < this.arrayVencedores.length; i++) {
       if (this.comparaTres(this.arrayVencedores[i][0].ttone, this.arrayVencedores[i][1].ttone, this.arrayVencedores[i][2].ttone)) casas = this.arrayVencedores[i];
     }
-
-    console.log(casas);
-    
 
     if (casas.length != 0) {
       setTimeout(() => {
@@ -78,19 +81,12 @@ export class TabuleiroComponent implements OnInit {
             url("../../assets/images/xmas.gif")
             left top
             no-repeat`
-        }).then((result) => {
-          if (result.value) {
-            setTimeout(() => {
-              this.tabuleiro = [
-                [new Casa(0, 0), new Casa(0, 1), new Casa(0, 2)],
-                [new Casa(1, 0), new Casa(1, 1), new Casa(1, 2)],
-                [new Casa(2, 0), new Casa(2, 1), new Casa(2, 2)]
-              ];
-            }, 500);
-          }
+        }).then(() => {
+          this.inicializaTab();
         });
-      }, 300);
+      }, 50);
     } else {
+
       //VERIFICA VELHA
       //Começa como true e verifica campo por campo com a negação de ativo
       // ou seja, se a div já foi clicada ativo é false, e sua negação true.
@@ -99,10 +95,11 @@ export class TabuleiroComponent implements OnInit {
       let deuVelha: boolean = true;
       for (let i = 0; i < this.tabuleiro.length; i++) {
         for (let j = 0; j < this.tabuleiro[i].length; j++) {
-          deuVelha = deuVelha && !this.tabuleiro[i][j].ativo;
+          deuVelha = deuVelha && this.tabuleiro[i][j].clicado;
         }
       }
-      if(deuVelha) {
+
+      if (deuVelha) {
         setTimeout(() => {
           Swal.fire({
             title: "Opa!!",
@@ -115,23 +112,11 @@ export class TabuleiroComponent implements OnInit {
               left top
               no-repeat`
           });
+          this.inicializaTab();
         }, 300);
       }
-    }
-  }
 
-  verificaVelha(): boolean {
-    //Começa como true e verifica campo por campo com a negação de ativo
-    // ou seja, se a div já foi clicada ativo é false, e sua negação true.
-    //Se alguma opção não foi clicada ela está como true e sua negação é false
-    // logo true & false = false.
-    let deuVelha: boolean = true;
-    for (let i = 0; i < this.tabuleiro.length; i++) {
-      for (let j = 0; j < this.tabuleiro[i].length; j++) {
-        deuVelha = deuVelha && !this.tabuleiro[i][j].ativo;
-      }
     }
-    return deuVelha;
   }
 
   comparaTres(a: string, b: string, c: string) {

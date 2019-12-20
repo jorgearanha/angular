@@ -6,12 +6,12 @@ interface posicao {
 export class Casa {
 
     constructor(lin: number, col: number){
-        this.ativo = true;
+        this.clicado = false;
         this.ttone = '';
         this.pos = { linha : lin, coluna : col };
     }
     
-    public ativo: boolean;
+    public clicado: boolean;
     public ttone: string;
     public pos: posicao;
     

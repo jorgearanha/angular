@@ -31,7 +31,7 @@ export class CasaComponent implements OnInit {
   }
 
   onClick() {
-    if (this.casa.ativo) {
+    if (!this.casa.clicado) {
       this.imprimeTtone();
       this.notificacao.emit();
     }
@@ -39,7 +39,7 @@ export class CasaComponent implements OnInit {
 
   imprimeTtone() {
     //modifica a instância de casa referente a casa;
-    this.casa.ativo = false;
+    this.casa.clicado = true;
     this.casa.ttone = this.ttone;
 
     //imprime o ttone de acordo com o ttone do input
