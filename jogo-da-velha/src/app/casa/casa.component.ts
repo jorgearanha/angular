@@ -33,7 +33,7 @@ export class CasaComponent implements OnInit {
   onClick() {
     if (!this.casa.clicado) {
       this.imprimeTtone();
-      this.notificacao.emit();
+      this.notificacao.emit(this.casa);
     }
   }
 

@@ -2,7 +2,7 @@
     <div id="container">
         <div *ngFor="let linha of tabuleiro">
             <div *ngFor="let casa of linha">
-                <app-casa [ttone]="ttone" [casa]="casa" (notificacao)="eventoFilho()"></app-casa>
+                <app-casa [ttone]="ttone" [casa]="casa" (notificacao)="eventoFilho(casa)"></app-casa>
             </div>
         </div>
     </div>
