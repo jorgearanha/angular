@@ -69,7 +69,7 @@ export class TabuleiroComponent implements OnInit {
     }).finally(() => {
       this.tabuleiroSevice.inicializaTab();
       this.getCasas();
-      this.getTtone()
+      this.getTtone();
     });
   }
 
@@ -89,7 +89,7 @@ export class TabuleiroComponent implements OnInit {
     }).then(() => {
       this.tabuleiroSevice.inicializaTab();
       this.getCasas();
-      this.getTtone()
+      this.getTtone();
     })
   }
 
