@@ -20,79 +20,77 @@ export class TabuleiroComponent implements OnInit {
     this.getCasas();
   }
 
-  eventoFilho(casa: Casa) {
-    let jogada = this.tabuleiroSevice.jogada();
-    console.log(jogada['vencedor']);
+  eventoFilho(pos: number[]) {
 
-    if (jogada['vencedor'].length != 0) {
+    //index do componente filho casa que recebeu um clique
+    let i = pos[0];
+    let j = pos[1];
 
-      Swal.fire({
-        imageUrl: '../../assets/images/' + jogada['vencedor'][0].ttone + '.png',
-        imageWidth: 200,
-        imageHeight: 200,
-        showConfirmButton: true,
-        confirmButtonColor: '#8B0000',
-        title: "Parabéns!",
-        text: "O vencedor foi: " + jogada['vencedor'][0].ttone,
-        background: '#F0F8FF url(../../assets/background/alert.png)',
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("../../assets/images/xmas.gif")
-          left top
-          no-repeat`,
-        html:
-          'Compre, ' +
-          '<a href="//sweetalert2.github.io">aqui</a>',
-      })
+    if (!this.tabuleiro[i][j].clicado) {
 
-      this.getCasas();
-    } else if (jogada['velha']) {
+      let jogada = this.tabuleiroSevice.jogada(i, j);
 
-      Swal.fire({
-        title: "Opa!!",
-        text: "Deu velha",
-        icon: "warning",
-        showConfirmButton: true,
-        confirmButtonColor: '#d20000',
-        background: '#F0F8FF url(../../assets/background/alert.png)',
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("../../assets/images/wtf.gif")
-          left top
-          no-repeat`
-      });
+      if (jogada['vencedor'].length != 0) {
+        this.mensagemVencedor(jogada['vencedor']);
+      } else if (jogada['velha']) {
+        this.mensagemVelha();
+      }
 
-      this.getCasas();
+      this.getTtone();
+
     }
 
-    this.getTtone();
   }
-
   getCasas(): void {
     //Recebe o tabuleiro usando Service -- Observable
-    this.tabuleiroSevice.getCasas()
-      .subscribe(tabuleiro => this.tabuleiro = tabuleiro);
+    this.tabuleiro = this.tabuleiroSevice.getCasas()
   }
 
   getTtone(): void {
     //Recebe a posicao atual de Ttone usando Service -- Observable
-    this.tabuleiroSevice.getTtone()
-      .subscribe(ttone => this.ttone = ttone);
+    this.ttone = this.tabuleiroSevice.getTtone();
   }
 
-  setCasa(casa: Casa): void{
-    let i: number;
-    let j: number;
+  mensagemVencedor(vencedor): void {
+    Swal.fire({
+      imageUrl: '../../assets/images/' + vencedor[0].ttone + '.png',
+      imageWidth: 200,
+      imageHeight: 200,
+      showConfirmButton: true,
+      confirmButtonColor: '#8B0000',
+      title: "Parabéns!",
+      text: "O vencedor foi: " + vencedor[0].ttone,
+      background: '#F0F8FF url(../../assets/background/alert.png)',
+      backdrop: `
+      rgba(0,0,123,0.4)
+      url("../../assets/images/xmas.gif")
+      left top
+      no-repeat`,
+    }).finally(() => {
+      this.tabuleiroSevice.inicializaTab();
+      this.getCasas();
+      this.getTtone()
+    });
+  }
 
-    for (let a = 0; a < this.tabuleiro.length; a++) {
-      for (let b = 0; b < this.tabuleiro[i].length; b++) {
-        if (this.tabuleiro[i][j] = casa) {
-          i = a;
-          j = b;
-        }
-      }
-    }
-    this.tabuleiroSevice.setCasa(casa, i, j);
+  mensagemVelha() {
+    Swal.fire({
+      title: "Opa!!",
+      text: "Deu velha",
+      icon: "warning",
+      showConfirmButton: true,
+      confirmButtonColor: '#d20000',
+      background: '#F0F8FF url(../../assets/background/alert.png)',
+      backdrop: `
+      rgba(0,0,123,0.4)
+      url("../../assets/images/wtf.gif")
+      left top
+      no-repeat`
+    }).then(() => {
+      this.tabuleiroSevice.inicializaTab();
+      this.getCasas();
+      this.getTtone()
+    })
   }
 
 }

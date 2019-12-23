@@ -1,8 +1,8 @@
 <section id="tabuleiro">
     <div id="container">
-        <div *ngFor="let linha of tabuleiro">
-            <div *ngFor="let casa of linha">
-                <app-casa [ttone]="ttone" [casa]="casa" (notificacao)="eventoFilho(casa)"></app-casa>
+        <div *ngFor="let linha of tabuleiro; let i = index">
+            <div *ngFor="let casa of linha; let j = index">
+                <app-casa [ttone]="ttone" [pos]="[i, j]" (notificacao)="eventoFilho($event)"></app-casa>
             </div>
         </div>
     </div>

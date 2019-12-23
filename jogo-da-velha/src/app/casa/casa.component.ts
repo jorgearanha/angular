@@ -9,8 +9,9 @@ import { Casa } from '../casa';
 export class CasaComponent implements OnInit {
 
   @Input() ttone: string;
-  @Input() casa: Casa;
-  @Output() notificacao = new EventEmitter();
+  @Input() pos: number[];
+  @Output() notificacao = new EventEmitter<number[]>();
+
 
   public classe: string;
   public src: string;
@@ -31,19 +32,15 @@ export class CasaComponent implements OnInit {
   }
 
   onClick() {
-    if (!this.casa.clicado) {
-      this.imprimeTtone();
-      this.notificacao.emit(this.casa);
-    }
+    this.imprimeTtone();
+    this.notificacao.emit(this.pos);
   }
 
   imprimeTtone() {
-    //modifica a instância de casa referente a casa;
-    this.casa.clicado = true;
-    this.casa.ttone = this.ttone;
-
     //imprime o ttone de acordo com o ttone do input
-    this.classe = this.classes[this.ttone];
-    this.src = this.srcs[this.ttone];
+    if (!this.src) {
+      this.classe = this.classes[this.ttone];
+      this.src = this.srcs[this.ttone];
+    }
   }
 }
